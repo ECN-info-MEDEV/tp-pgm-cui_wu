@@ -1,5 +1,4 @@
-
-
+package org.centrale.projet.medev.tp_pgm_git;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -19,6 +18,9 @@ public class HelloWorld {
         
         PGM testPGM = new PGM(input);
         testPGM.read();
-        testPGM.thresholding(150);
+        System.out.println("Please enter the threshold for thresholding (0 - 255)");
+        int threshold = Integer.parseInt(sc.nextLine());
+        testPGM.thresholding(threshold);
+        testPGM.generateHistogram();
     }
 }

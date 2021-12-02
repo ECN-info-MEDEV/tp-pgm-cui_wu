@@ -1,3 +1,4 @@
+package org.centrale.projet.medev.tp_pgm_git;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,12 +12,22 @@ import java.util.*;
  */
 public class PGM {
     
-    String filename;
-    int width, height;
-    int grayMax;
-    ArrayList<Integer> bucket;
+    /**
+     * This class is for the processing of a PGM image file.
+     * filename : path to the image file
+     * width, height : well obviously
+     * grayMax : the maximum value of the grayscale of the image
+     * bucket : counts of grayscale values
+     */
+    private String filename;
+    private int width, height;
+    private int grayMax;
+    private ArrayList<Integer> bucket;
     
-    
+    /**
+     * Read and process the image file.
+     * Fill the bucket for the generation of the histogram
+     */
     public void read() {
         try {
             FileInputStream fin = new FileInputStream(filename);
@@ -43,10 +54,15 @@ public class PGM {
         }
     }
     
-    public void write() {
-        
-    }
+//    public void write() {
+//        
+//    }
     
+    /**
+     * Histogram generation.
+     * Width : the number of grayscale of the image
+     * Height : the count of the grayscale which the image has the most
+     */
     public void generateHistogram() {
         int bucketMax = Collections.max(bucket);
         String histogramfile = filename.replace(".pgm", "_histogram.pgm");
@@ -83,8 +99,17 @@ public class PGM {
         
     }
     
+    /**
+     * Thresholding the image. 
+     * @param threshold the grayscale threshold
+     * This method generates a new .pgm image that after thresholding
+     */
     public void thresholding(int threshold) {
         String threshfile = filename.replace(".pgm", "_threashold.pgm");
+        if (threshold > 255 || threshold < 0) {
+            System.out.println("Illegal threshold value. ");
+            return;
+        }
         try {
             FileInputStream fin = new FileInputStream(filename);
             System.setIn(fin);
@@ -122,9 +147,9 @@ public class PGM {
         }
     }
     
-    public void difference() {
-        
-    }
+//    public void difference() {
+//        
+//    }
     
     public PGM(String filename) {
         this.filename = filename;
